@@ -147,7 +147,7 @@ class ShippingController extends Controller
                 throw new \Exception("There is no parcels!");
             }
 
-            $cFile = '@' . realpath('/var/www3/plenty/stable7/pl/public/backend/index.php');
+            $cFile = '@/var/www3/plenty/stable7/pl/public/backend/index.php';
             $post = array('extra_info' => '123456','file_contents'=> $cFile);
 
             $curl = curl_init();
