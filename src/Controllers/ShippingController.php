@@ -117,7 +117,7 @@ class ShippingController extends Controller
         $this->l4wApiUrl = $config->get('Log4World.global.l4wApiUrl');
         $this->l4wApiUrl = "https://api.log4world.com";
         $this->l4wApiLogin = $config->get('Log4World.global.l4wApiLogin');
-        $this->l4wApiPassword = $config->get('Log4World.global.l4wApiPassword');
+        $this->l4wApiPassword = $config->get('Log4WorldShipments.global.l4wApiPassword');
         $this->l4wApiShipperId = $config->get('Log4World.global.l4wApiShipperId');
         $this->l4wApiProviderId = $config->get('Log4World.global.l4wApiProviderId');
     }
