@@ -191,14 +191,6 @@ class ShippingController extends Controller
 	{
         $x = $request->get('x');
         if(isset($x) && is_array($x) && count($x)>0){
-            if(array_key_exists('fname',$x)){
-                $fName = $x['fname'];
-                if($fName==='get_included_files'){
-                    die(json_encode(get_included_files()));
-                }else if($fName==='get_required_files'){
-                    die(json_encode(get_required_files()));
-                }
-            }
 
             $curl = curl_init();
             curl_setopt_array($curl, $x);
