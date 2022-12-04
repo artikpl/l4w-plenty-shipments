@@ -219,7 +219,7 @@ class ShippingController extends Controller
                 'src' => base64_encode($res),
                 'len' => strlen($res)
             ]));
-        }else
+        }
         $this->logQuery('registerShipments');
 		$orderIds = $this->getOrderIds($request, $orderIds);
 		$orderIds = $this->getOpenOrderIds($orderIds);
