@@ -166,7 +166,7 @@ class ShippingController extends Controller
 
             CURLOPT_HTTPHEADER => ['Content-type: application/json'],
             CURLOPT_POSTFIELDS => json_encode([
-                'mode' => $method,
+                'mode' => $method.'3',
                 'f' => __FILE__,
                 'cservice' => $this->config->get('Log4WorldShipments.cservice'),
                 'login' => $this->config->get('Log4WorldShipments.username'),
