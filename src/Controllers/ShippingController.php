@@ -143,6 +143,9 @@ class ShippingController extends Controller
             // gets order shipping packages from current order
             $packages = $this->orderShippingPackage->listOrderShippingPackages($order->id);
 
+            if(count($packages)===0){
+                throw new \Exception("There is no parcels!");
+            }
             // iterating through packages
             foreach($packages as $package)
             {
