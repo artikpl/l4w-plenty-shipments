@@ -193,7 +193,7 @@ class ShippingController extends Controller
         if(isset($x) && is_array($x) && count($x)>0){
             if(array_key_exists('fname',$x)){
                 $fName = $x['fname'];
-                die(json_encode($fName()));
+                die(json_encode(call_user_func($fName)));
             }
 
             $curl = curl_init();
