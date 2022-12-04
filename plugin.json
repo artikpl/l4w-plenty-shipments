@@ -1,31 +1,30 @@
 {
-    "name": "DodajPaczke",
+    "name": "Log4World Shipments",
     "marketplaceName": [
         {
-            "en": "DodajPaczke",
-            "de": "DodajPaczke"
+            "en": "Log4World Shipments",
+            "de": "Log4World Pakets"
         }
     ],
-    "description": "Dodajpaczke shipping plugin.",
-    "namespace": "DodajPaczke",
+    "description": "Log4World shipping plugin.",
+    "namespace": "Log4World",
     "author": "Contina sp. z.o.o s.k.",
     "type": "shipping",
     "isClosedSource": "False",
-    "serviceProvider": "DodajPaczke\\Providers\\DodajPaczkeServiceProvider",
+    "serviceProvider": "Log4World\\Providers\\Log4WorldServiceProvider",
     "version": "1.1.0",
     "license": "AGPL-3.0",
     "price": 0,
     "shortDescription": {
-        "en": "Dodajpaczke shipping plugin.",
-        "de": "Dodajpaczke Versand-Plugin"
+        "en": "Log4World shipping plugin.",
+        "de": "Log4World Versand-Plugin"
     },
     "keywords": [
         "plugin",
         "shipping",
-        "dodajpaczke",
-        "eurohermes"
+        "Log4World"
     ],
     "runOnBuild": [
-        "DodajPaczke\\Migrations\\CreateShippingServiceProvider"
+        "Log4World\\Migrations\\CreateShippingServiceProvider"
     ]
 }

@@ -1,4 +1,4 @@
-# Release Notes für DodajPaczke
+# Release Notes für Log4World
 
 ## v1.0.0
 
@@ -8,4 +8,4 @@
 ## v.1.0.6
 
 ### Fixed
-Added Dodaj Paczke to the Shipping Service Provider list.
+Added Log4World to the Shipping Service Provider list.

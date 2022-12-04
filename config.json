@@ -5,32 +5,32 @@
       "label": "Config.global",
       "fullWidth": true,
       "formFields": {
-        "global.ehApiUrl": {
+        "global.l4wApiUrl": {
           "type": "inputText",
-          "label": "Config.ehApiUrl",
+          "label": "Config.l4wApiUrl",
           "required": true
         },
-        "global.ehApiLogin": {
+        "global.l4wApiLogin": {
           "type": "inputText",
-          "label": "Config.ehApiLogin",
+          "label": "Config.l4wApiLogin",
           "required": true
         },
-        "global.ehApiPassword": {
+        "global.l4wApiPassword": {
           "type": "inputText",
-          "label": "Config.ehApiPassword",
+          "label": "Config.l4wApiPassword",
           "required": true,
           "options": {
             "isPassword": true
           }
         },
-        "global.ehApiShipperId": {
+        "global.l4wApiShipperId": {
           "type": "inputNumber",
-          "label": "Config.ehApiShipperId",
+          "label": "Config.l4wApiShipperId",
           "required": true
         },
-        "global.ehApiProviderId": {
+        "global.l4wApiProviderId": {
           "type": "selectBox",
-          "label": "Config.ehApiProviderId",
+          "label": "Config.l4wApiProviderId",
           "required": true,
           "options": {
             "tooltip": "Config.additionalSettingsMoreFulfillmentClientTooltip",

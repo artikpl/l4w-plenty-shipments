@@ -24,7 +24,7 @@ class Log4WorldServiceProvider extends ServiceProvider
     {
         $shippingServiceProviderService->registerShippingProvider(
             'Log4World',
-            ['en' => 'Dodaj Paczke', 'de' => 'Dodaj Paczke'],
+            ['en' => 'Log4World', 'de' => 'Log4World'],
             [
                 'Log4World\\Controllers\\ShippingController@registerShipments',
                 'Log4World\\Controllers\\ShippingController@deleteShipments',
