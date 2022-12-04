@@ -1,30 +1,19 @@
 {
-    "name": "Log4WorldShipments",
-    "marketplaceName": [
-        {
-            "en": "Log4World Shipments",
-            "de": "Log4World Pakets"
-        }
-    ],
-    "description": "Log4World shipping plugin.",
-    "namespace": "Log4World",
-    "author": "Log4World",
-    "type": "shipping",
-    "isClosedSource": "False",
-    "serviceProvider": "Log4World\\Providers\\Log4WorldServiceProvider",
-    "version": "1.1.0",
-    "license": "AGPL-3.0",
-    "price": 0,
-    "shortDescription": {
-        "en": "Log4World shipping plugin.",
-        "de": "Log4World Versand-Plugin"
-    },
-    "keywords": [
-        "plugin",
-        "shipping",
-        "Log4World"
-    ],
-    "runOnBuild": [
-        "Log4World\\Migrations\\CreateShippingServiceProvider"
-    ]
+      "name"                  : "Log4WorldShipments",
+      "marketplaceName"       : [{"en":"shipping plugin tutorial", "de":"Versandplugin-Tutorial"}],
+      "description"           : "A basic shipping plugin by plentymarkets",
+      "namespace"             : "Log4WorldShipments",
+      "author"                : "plentymarkets GmbH",
+      "type"                  : "shipping",
+      "isClosedSource"        : "False",
+      "serviceProvider"       : "Log4WorldShipments\\Providers\\Log4WorldShipmentsServiceProvider",
+      "version"               : "0.1.1",
+      "license"               : "AGPL-3.0",
+      "pluginIcon"            : "icon_plugin_xs.png",
+      "price"                 : 0.00,
+      "shortDescription"      : {"en": "A basic shipping plugin", "de": "Ein einfaches Versand-Plugin"},
+      "keywords"              : ["plugin", "shipping", "tutorial"],
+      "authorIcon"            : "icon_author_xs.png",
+      "email"                 : "sales@plentymarkets.com",
+      "phone"                 : "+49 561 98 681 100"
 }

@@ -1,11 +1,6 @@
-# Release Notes für Log4World
+# Release Notes for PluginLog4WorldShipments
 
-## v1.0.0
+## v0.1.0 (2017-02-19)
 
-### Hinzugefügt
-[Weitere Informationen](https://developers.plentymarkets.com/marketplace/plugin-requirements#marketplace-changelog)
-
-## v.1.0.6
-
-### Fixed
-Added Log4World to the Shipping Service Provider list.
+### Added
+- initial version

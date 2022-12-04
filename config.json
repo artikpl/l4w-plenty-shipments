@@ -1,165 +1,85 @@
-{
-  "formatVersion": 1,
-  "menu": {
-    "global": {
-      "label": "Config.global",
-      "fullWidth": true,
-      "formFields": {
-        "global.l4wApiUrl": {
-          "type": "inputText",
-          "label": "Config.l4wApiUrl",
-          "required": true
-        },
-        "global.l4wApiLogin": {
-          "type": "inputText",
-          "label": "Config.l4wApiLogin",
-          "required": true
-        },
-        "global.l4wApiPassword": {
-          "type": "inputText",
-          "label": "Config.l4wApiPassword",
-          "required": true,
-          "options": {
-            "isPassword": true
-          }
-        },
-        "global.l4wApiShipperId": {
-          "type": "inputNumber",
-          "label": "Config.l4wApiShipperId",
-          "required": true
-        },
-        "global.l4wApiProviderId": {
-          "type": "selectBox",
-          "label": "Config.l4wApiProviderId",
-          "required": true,
-          "options": {
-            "tooltip": "Config.additionalSettingsMoreFulfillmentClientTooltip",
-            "defaultValue": "1",
-            "selectBoxValues": [
-              {
-                "value": "1",
-                "caption": "Config.dhl"
-              },
-              {
-                "value": "2",
-                "caption": "Config.rm24t"
-              },
-              {
-                "value": "3",
-                "caption": "Config.rm48tns"
-              },
-              {
-                "value": "4",
-                "caption": "Config.rm24"
-              },
-              {
-                "value": "5",
-                "caption": "Config.rm48"
-              },
-              {
-                "value": "6",
-                "caption": "Config.b2ce"
-              },
-              {
-                "value": "7",
-                "caption": "Config.colissimo"
-              },
-              {
-                "value": "8",
-                "caption": "Config.colissimoS"
-              },
-              {
-                "value": "9",
-                "caption": "Config.colissimoCP"
-              },
-              {
-                "value": "11",
-                "caption": "Config.b2cfml"
-              },
-              {
-                "value": "12",
-                "caption": "Config.packetaHome"
-              },
-              {
-                "value": "13",
-                "caption": "Config.packetaPudo"
-              },
-              {
-                "value": "14",
-                "caption": "Config.glspl"
-              },
-              {
-                "value": "15",
-                "caption": "Config.glsde"
-              },
-              {
-                "value": "16",
-                "caption": "Config.rm48ts"
-              },
-              {
-                "value": "17",
-                "caption": "Config.upsStandard"
-              },
-              {
-                "value": "18",
-                "caption": "Config.dpdClassic"
-              },
-              {
-                "value": "19",
-                "caption": "Config.dhlStandard"
-              },
-              {
-                "value": "20",
-                "caption": "Config.rm24u_v2"
-              },
-              {
-                "value": "21",
-                "caption": "Config.rm24tns_v2"
-              },
-              {
-                "value": "22",
-                "caption": "Config.rm48u_v2"
-              },
-              {
-                "value": "23",
-                "caption": "Config.rm48tsn_v2"
-              },
-              {
-                "value": "24",
-                "caption": "Config.rm48ts_v2"
-              },
-              {
-                "value": "25",
-                "caption": "Config.dp"
-              },
-              {
-                "value": "26",
-                "caption": "Config.rm24ts_v2"
-              },
-              {
-                "value": "27",
-                "caption": "Config.dhl_v2"
-              },
-              {
-                "value": "28",
-                "caption": "Config.fedexT"
-              },
-              {
-                "value": "29",
-                "caption": "Config.fedexP"
-              },
-              {
-                "value": "30",
-                "caption": "Config.fedexU"
-              },
-              {
-                "value": "31",
-                "caption": "Config.fedexE"
-              }
-            ]
-          }
-        }
-      }
-    }
+[
+  {
+    "tab": "General",
+    "key": "mode",
+    "label": "Mode",
+    "type": "dropdown",
+    "possibleValues": {
+      "0": "Test",
+      "1": "Productive"
+    },
+    "default": "0"
+  },
+  {
+  "tab": "General",
+  "key": "cservice",
+  "label": "Service",
+  "type": "dropdown",
+  "possibleValues": {
+    "": "",
+    "dhlde": "DHL DE",
+    "glsde": "GLS DE"
+  },
+  "default": ""
+},
+  {
+    "tab": "General",
+    "key": "username",
+    "label": "Username",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "tab": "General",
+    "key": "password",
+    "label": "Password",
+    "type": "password",
+    "default": ""
+  },
+  {
+    "tab": "Sender",
+    "key": "senderName",
+    "label": "Name",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "tab": "Sender",
+    "key": "senderStreet",
+    "label": "Street",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "tab": "Sender",
+    "key": "senderNo",
+    "label": "No",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "tab": "Sender",
+    "key": "senderPostalCode",
+    "label": "Postal code",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "tab": "Sender",
+    "key": "senderTown",
+    "label": "Town",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "tab": "Sender",
+    "key": "senderCountry",
+    "label": "Country",
+    "type": "dropdown",
+    "possibleValues": {
+      "0": "Germany",
+      "1": "Austria"
+    },
+    "default": "0"
   }
-}
+]
