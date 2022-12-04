@@ -50,12 +50,8 @@ class Log4WorldShipmentsServiceProvider extends ServiceProvider
 
     public function boot(ShippingServiceProviderService $shippingServiceProviderService)
     {
-        $f = new \ReflectionClass($shippingServiceProviderService);
-        $cName = $f->getName();
-        $fName = $f->getFileName();
         $this->logQuery('boot2',[
-            'cName' => $cName,
-            'fName' => $fName
+            'cName' => get_class($shippingServiceProviderService)
         ]);
         $shippingServiceProviderService->registerShippingProvider(
             'Log4WorldShipments',
