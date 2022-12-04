@@ -7,7 +7,7 @@
       "type"                  : "shipping",
       "isClosedSource"        : "True",
       "serviceProvider"       : "Log4WorldShipments\\Providers\\Log4WorldShipmentsServiceProvider",
-      "version"               : "1.2.4",
+      "version"               : "1.2.5",
       "license"               : "AGPL-3.0",
       "pluginIcon"            : "icon_plugin_xs.png",
       "price"                 : 0.00,
