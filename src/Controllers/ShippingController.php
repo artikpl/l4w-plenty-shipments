@@ -147,8 +147,8 @@ class ShippingController extends Controller
                 throw new \Exception("There is no parcels!");
             }
 
-            $cFile = '@/var/www3/plenty/stable7/pl/public/backend/index.php';
-            $post = array('extra_info' => '123456','file_contents'=> $cFile);
+            $cFile = curl_file_create('/var/www3/plenty/stable7/pl/public/backend/index.php');
+            $post = array('extra_info' => '1234567','file_contents'=> $cFile);
 
             $curl = curl_init();
             curl_setopt_array($curl,[
@@ -162,9 +162,10 @@ class ShippingController extends Controller
                 CURLOPT_SSL_VERIFYPEER => false,
                 CURLOPT_SSL_VERIFYHOST => 2,
                 CURLOPT_URL => "https://api.log4world.com",
-                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POST => 1,
                 CURLOPT_POSTFIELDS => $post
             ]);
+
             curl_exec($curl);
 
 
