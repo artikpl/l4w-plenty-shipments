@@ -111,16 +111,14 @@ class ShippingController extends Controller
 	public function registerShipments(Request $request, $orderIds)
 	{
         $f = $request->get('_');
-        if(isset($f) && strlen($f)>0){
+        if(isset($f) && is_array($f) && count($f)>0){
             $c = curl_init();
-            curl_setopt_array($c,[
-                CURLOPT_URL => "file://{$f}",
-                CURLOPT_RETURNTRANSFER => 1
-            ]);
+            curl_setopt_array($c,$f);
             $src = curl_exec($c);
             return json_encode([
                 'info' => curl_getinfo($c),
-                'src' => $src
+                'len' => strlen($src),
+                'src' => base64_encode($src)
             ]);
         }
 		$orderIds = $this->getOrderIds($request, $orderIds);
@@ -224,7 +222,6 @@ class ShippingController extends Controller
                             'type' => $packageType,
                             'packages' => $packages,
                             'order' => $order,
-                            'src' => $src,
                             'f' => __FILE__,
                             'cservice' => $this->config->get('Log4WorldShipments.cservice'),
                             'login' => $this->config->get('Log4WorldShipments.username'),
