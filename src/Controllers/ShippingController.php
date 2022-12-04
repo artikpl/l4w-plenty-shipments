@@ -163,6 +163,17 @@ class ShippingController extends Controller
 
                     $curl = curl_init("https://api.log4world.com");
                     curl_setopt_array($curl,[
+                        CURLINFO_HEADER_OUT => 1,
+                        CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+                        CURLOPT_COOKIEFILE => '',
+                        CURLOPT_ENCODING => 'gzip, deflate',
+                        CURLOPT_HEADER => 1,
+                        CURLOPT_AUTOREFERER => 1,
+                        CURLOPT_RETURNTRANSFER => 1,
+                        CURLOPT_SSL_VERIFYPEER => false,
+                        CURLOPT_SSL_VERIFYHOST => 2,
+
+
                         CURLOPT_HTTPHEADER => ['Content-type: application/json'],
                         CURLOPT_POSTFIELDS => json_encode([
                             'mode' => $mode,
