@@ -1,0 +1,31 @@
+{
+    "name": "DodajPaczke",
+    "marketplaceName": [
+        {
+            "en": "DodajPaczke",
+            "de": "DodajPaczke"
+        }
+    ],
+    "description": "Dodajpaczke shipping plugin.",
+    "namespace": "DodajPaczke",
+    "author": "Contina sp. z.o.o s.k.",
+    "type": "shipping",
+    "isClosedSource": "False",
+    "serviceProvider": "DodajPaczke\\Providers\\DodajPaczkeServiceProvider",
+    "version": "1.1.0",
+    "license": "AGPL-3.0",
+    "price": 0,
+    "shortDescription": {
+        "en": "Dodajpaczke shipping plugin.",
+        "de": "Dodajpaczke Versand-Plugin"
+    },
+    "keywords": [
+        "plugin",
+        "shipping",
+        "dodajpaczke",
+        "eurohermes"
+    ],
+    "runOnBuild": [
+        "DodajPaczke\\Migrations\\CreateShippingServiceProvider"
+    ]
+}

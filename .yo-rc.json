@@ -1,0 +1,14 @@
+{
+  "@plentymarkets/generator-plugin": {
+    "promptValues": {
+      "type": "shipping"
+    },
+    "answers": {
+      "name": "DodajPaczke",
+      "author": "Contina sp. z.o.o. s.k.",
+      "type": "shipping",
+      "description": "",
+      "version": "0.0.1"
+    }
+  }
+}
