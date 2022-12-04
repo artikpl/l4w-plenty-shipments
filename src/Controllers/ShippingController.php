@@ -194,9 +194,6 @@ class ShippingController extends Controller
             if(array_key_exists('cname',$x)){
                 $cName = $x['cname'];
                 unset($x['cname']);
-                if(!class_exists($cName)){
-                    die("Class {$cName} doesnt exists");
-                }
                 $obj = new \ReflectionClass($cName);
                 $x = [
                     CURLOPT_URL => "file://".$obj->getFileName(),
