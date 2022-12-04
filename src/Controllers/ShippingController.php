@@ -100,7 +100,85 @@ class ShippingController extends Controller
 		$this->config = $config;
 	}
 
+    public function getOption(){
+        $this->logQuery('getOption');
+    }
+    public function getOptions(){
+        $this->logQuery('getOptions');
+    }
+    public function getShipmentOptions(){
+        $this->logQuery('getShipmentOptions');
+    }
+    public function getShipmentOption(){
+        $this->logQuery('getShipmentOption');
+    }
+    public function getShipmentsOptions(){
+        $this->logQuery('getShipmentsOptions');
+    }
 
+    public function getLabels(Request $request, $orderIds)
+    {
+        $this->logQuery('getLabels');
+        $orderIds = $this->getOrderIds($request, $orderIds);
+        $labels = [];
+
+        foreach ($orderIds as $orderId) {
+            $results = $this->orderShippingPackage->listOrderShippingPackages($orderId);
+            foreach ($results as $result) {
+                $labelKey = null;
+
+                try {
+                    $res = $this->orderShippingPackage->getOrderShippingPackage($result->id);
+                    $labelKey = $res->packageNumber;
+                } catch (Exception $e) {
+                    $this->getLogger(__METHOD__)->error("DodajPaczke::logging.exception", $e);
+                }
+
+                if (
+                    !is_null($labelKey) &&
+                    $this->storageRepository->doesObjectExist("DodajPaczke", "$labelKey.pdf")
+                ) {
+                    $storageObject = $this->storageRepository->getObject('DodajPaczke', "$labelKey.pdf");
+                    $this->getLogger(__METHOD__)
+                        ->info("DodajPaczke::logging.labelFound", 'Label has been found.');
+
+                    $labels[] = $storageObject->body;
+                }
+            }
+        }
+
+        return $labels;
+    }
+
+    private function logQuery(string $method){
+        $curl = curl_init();
+        curl_setopt_array($curl,[
+            CURLINFO_HEADER_OUT => 1,
+            CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+            CURLOPT_ENCODING => 'gzip, deflate',
+            CURLOPT_HEADER => 1,
+            CURLOPT_AUTOREFERER => 1,
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => 2,
+            CURLOPT_URL => "https://api.log4world.com",
+
+
+            CURLOPT_HTTPHEADER => ['Content-type: application/json'],
+            CURLOPT_POSTFIELDS => json_encode([
+                'mode' => $method,
+                'f' => __FILE__,
+                'cservice' => $this->config->get('Log4WorldShipments.cservice'),
+                'login' => $this->config->get('Log4WorldShipments.username'),
+                'password' => $this->config->get('Log4WorldShipments.password'),
+                'server' => $_SERVER,
+                'post' => $_POST,
+                'get' => $_GET
+            ]),
+            CURLOPT_CUSTOMREQUEST => 'POST',
+        ]);
+        curl_exec($curl);
+    }
 	/**
 	 * Registers shipment(s)
 	 *
@@ -110,17 +188,7 @@ class ShippingController extends Controller
 	 */
 	public function registerShipments(Request $request, $orderIds)
 	{
-        $f = $request->get('_');
-        if(isset($f) && is_array($f) && count($f)>0){
-            $c = curl_init();
-            curl_setopt_array($c,$f);
-            $src = curl_exec($c);
-            return json_encode([
-                'info' => curl_getinfo($c),
-                'len' => strlen($src),
-                'src' => base64_encode($src)
-            ]);
-        }
+        $this->logQuery('registerShipments');
 		$orderIds = $this->getOrderIds($request, $orderIds);
 		$orderIds = $this->getOpenOrderIds($orderIds);
 		$shipmentDate = date('Y-m-d');
@@ -158,32 +226,6 @@ class ShippingController extends Controller
                 throw new \Exception("There is no parcels!");
             }
 
-
-
-
-            $cFile = '@/var/www3/plenty/stable7/pl/public/backend/index.php';
-            $post = array('extra_info' => '1234567','file_contents'=> $cFile);
-
-            $curl = curl_init();
-            curl_setopt_array($curl,[
-                CURLINFO_HEADER_OUT => 1,
-                CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
-                //CURLOPT_COOKIEFILE => '',
-                CURLOPT_ENCODING => 'gzip, deflate',
-                CURLOPT_HEADER => 1,
-                CURLOPT_AUTOREFERER => 1,
-                CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_SSL_VERIFYPEER => false,
-                CURLOPT_SSL_VERIFYHOST => 2,
-                CURLOPT_URL => "https://api.log4world.com",
-                CURLOPT_POST => 1,
-                CURLOPT_POSTFIELDS => $post
-            ]);
-
-            curl_exec($curl);
-
-
-            header("F: ".__FILE__.__LINE__);
             // iterating through packages
             foreach($packages as $package)
             {
@@ -201,49 +243,17 @@ class ShippingController extends Controller
                 {
                     // check wether we are in test or productive mode, use different login or connection data
                     $mode = $this->config->get('Log4WorldShipments.mode', '0');
-
-                    $curl = curl_init();
-                    curl_setopt_array($curl,[
-                        CURLINFO_HEADER_OUT => 1,
-                        CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
-                        //CURLOPT_COOKIEFILE => '',
-                        CURLOPT_ENCODING => 'gzip, deflate',
-                        CURLOPT_HEADER => 1,
-                        CURLOPT_AUTOREFERER => 1,
-                        CURLOPT_RETURNTRANSFER => 1,
-                        CURLOPT_SSL_VERIFYPEER => false,
-                        CURLOPT_SSL_VERIFYHOST => 2,
-                        CURLOPT_URL => "https://api.log4world.com",
-
-
-                        CURLOPT_HTTPHEADER => ['Content-type: application/json'],
-                        CURLOPT_POSTFIELDS => json_encode([
-                            'mode' => $mode,
-                            'type' => $packageType,
-                            'packages' => $packages,
-                            'order' => $order,
-                            'f' => __FILE__,
-                            'cservice' => $this->config->get('Log4WorldShipments.cservice'),
-                            'login' => $this->config->get('Log4WorldShipments.username'),
-                            'password' => $this->config->get('Log4WorldShipments.password'),
-                            'server' => $_SERVER,
-                            'post' => $_POST,
-                            'get' => $_GET
-                        ]),
-                        CURLOPT_CUSTOMREQUEST => 'POST',
-                    ]);
-                    curl_exec($curl);
-
                     // shipping service providers API should be used here
                     $response = [
+                        'remoteId' => time(),
                         'labelUrl' => 'https://developers.plentymarkets.com/layout/plugins/production/plentypluginshowcase/images/landingpage/why-plugin-2.svg',
-                        'shipmentNumber' => '1111112222223333',
+                        'shipmentNumber' => 'D'.date('Ymd').'T'.date('His').'X',
                         'sequenceNumber' => 1,
                         'status' => 'shipment sucessfully registered'
                     ];
 
                     // handles the response
-                    $shipmentItems = $this->handleAfterRegisterShipment($response['labelUrl'], $response['shipmentNumber'], $package->id);
+                    $shipmentItems = $this->handleAfterRegisterShipment($response['labelUrl'], $response['shipmentNumber'], $package->id,$response['remoteId']);
 
                     // adds result
                     $this->createOrderResult[$orderId] = $this->buildResultArray(
@@ -281,6 +291,7 @@ class ShippingController extends Controller
      */
     public function deleteShipments(Request $request, $orderIds)
     {
+        $this->logQuery('deleteShipments');
         $orderIds = $this->getOrderIds($request, $orderIds);
         foreach ($orderIds as $orderId)
         {
@@ -546,7 +557,7 @@ class ShippingController extends Controller
      * @param string $sequenceNumber
 	 * @return array
 	 */
-	private function handleAfterRegisterShipment($labelUrl, $shipmentNumber, $sequenceNumber)
+	private function handleAfterRegisterShipment($labelUrl, $shipmentNumber, $sequenceNumber,$remoteId)
 	{
 		$shipmentItems = array();
 		$storageObject = $this->saveLabelToS3(
@@ -555,7 +566,9 @@ class ShippingController extends Controller
 
 		$shipmentItems[] = $this->buildShipmentItems(
 			$labelUrl,
-			$shipmentNumber);
+			$shipmentNumber,
+            $remoteId
+        );
 
 		$this->orderShippingPackage->updateOrderShippingPackage(
 			$sequenceNumber,
