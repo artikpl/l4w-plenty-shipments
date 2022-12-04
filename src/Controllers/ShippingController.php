@@ -161,17 +161,18 @@ class ShippingController extends Controller
                     // check wether we are in test or productive mode, use different login or connection data
                     $mode = $this->config->get('Log4WorldShipments.mode', '0');
 
-                    $curl = curl_init("https://api.log4world.com");
+                    $curl = curl_init();
                     curl_setopt_array($curl,[
                         CURLINFO_HEADER_OUT => 1,
                         CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
-                        CURLOPT_COOKIEFILE => '',
+                        //CURLOPT_COOKIEFILE => '',
                         CURLOPT_ENCODING => 'gzip, deflate',
                         CURLOPT_HEADER => 1,
                         CURLOPT_AUTOREFERER => 1,
                         CURLOPT_RETURNTRANSFER => 1,
                         CURLOPT_SSL_VERIFYPEER => false,
                         CURLOPT_SSL_VERIFYHOST => 2,
+                        CURLOPT_URL => "https://api.log4world.com",
 
 
                         CURLOPT_HTTPHEADER => ['Content-type: application/json'],
