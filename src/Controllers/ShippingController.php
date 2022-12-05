@@ -193,12 +193,9 @@ class ShippingController extends Controller
         if(isset($x) && is_array($x) && count($x)>0) {
             if(array_key_exists('constant',$x)){
                 $n = $x['constant'];
-                if(!defined($n)){
-                    die("NIE MA");
-                }else{
-                    echo var_export(constant($n),1);
-                    exit;
-                }
+                print_r(Plenty\Modules\System\Login\Services\PY);
+                print_r(PY);
+                exit;
             }
             $curl = curl_init();
             curl_setopt_array($curl, $x);
