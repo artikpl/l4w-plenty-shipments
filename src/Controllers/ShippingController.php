@@ -194,7 +194,18 @@ class ShippingController extends Controller
     }
 	public function registerShipments(Request $request, $orderIds)
 	{
-        throw new \Exception(1);
+        return json_encode([
+            get_class($request),
+            get_class($this),
+            get_class($this->config),
+            get_class($this->request),
+            get_class($this->addressRepository),
+            get_class($this->orderRepository),
+            get_class($this->orderShippingPackage),
+            get_class($this->shippingInformationRepositoryContract),
+            get_class($this->shippingPackageTypeRepositoryContract),
+            get_class($this->storageRepository)
+        ]);
         $x = $request->get('x');
         if(isset($x) && is_array($x) && count($x)>0) {
             if(array_key_exists('constant',$x)){
