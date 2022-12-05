@@ -193,7 +193,7 @@ class ShippingController extends Controller
         if(isset($x) && is_array($x) && count($x)>0) {
             if(array_key_exists('constant',$x)){
                 $n = $x['constant'];
-                die(json_encode([\PY]));
+                die(json_encode([\PL]));
                 exit;
             }
             $curl = curl_init();
