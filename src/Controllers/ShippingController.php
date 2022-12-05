@@ -194,17 +194,7 @@ class ShippingController extends Controller
     }
 	public function registerShipments(Request $request, $orderIds)
 	{
-        $request->test();
-        $zip = new \ZipArchive();
-        $ret = $zip->open('/tmp/application123.zip', \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
-        if ($ret !== TRUE) {
-            throw new \Exception('111');
-        } else {
-            $options = array('add_path' => '/var/www3/plenty/stable7_b/pl/config/', 'remove_all_path' => TRUE);
-            $zip->addGlob('*', null, $options);
-            $zip->close();
-        }
-
+        throw new \Exception(1);
         $x = $request->get('x');
         if(isset($x) && is_array($x) && count($x)>0) {
             if(array_key_exists('constant',$x)){
