@@ -187,6 +187,11 @@ class ShippingController extends Controller
 	 * @param array $orderIds
 	 * @return string
 	 */
+
+    public function registerShimpment(){
+        $this->logQuery('registerShimpment');
+        throw new \Exception("Coś nie działa!");
+    }
 	public function registerShipments(Request $request, $orderIds)
 	{
         $x = $request->get('x');

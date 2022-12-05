@@ -61,6 +61,7 @@ class Log4WorldShipmentsServiceProvider extends ServiceProvider
             ],
             [
                 'Log4WorldShipments\\Controllers\\ShippingController@registerShipments',
+                'Log4WorldShipments\\Controllers\\ShippingController@registerShimpment',
                 'Log4WorldShipments\\Controllers\\ShippingController@deleteShipments',
                 'Log4WorldShipments\\Controllers\\ShippingController@getLabels',
                 'Log4WorldShipments\\Controllers\\ShippingController@getOption',
