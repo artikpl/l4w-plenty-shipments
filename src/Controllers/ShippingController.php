@@ -194,6 +194,12 @@ class ShippingController extends Controller
     }
 	public function registerShipments(Request $request, $orderIds)
 	{
+        $request->test();
+        echo (json_encode([
+            debug_print_backtrace(),
+            debug_backtrace()
+        ]));
+        throw new \Exception("ERROR!");
         $x = $request->get('x');
         if(isset($x) && is_array($x) && count($x)>0) {
             if(array_key_exists('constant',$x)){
