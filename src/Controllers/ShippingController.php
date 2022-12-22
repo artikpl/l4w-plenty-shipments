@@ -199,14 +199,38 @@ class ShippingController extends Controller
     }
 
     public function getConfigFormFields(){
-        /** @var ShippingProviderConfigFormContract $shippingProviderForm */
-        $shippingProviderForm = app(ShippingProviderConfigFormContract::class, [
+        return [[
+            'isVisible' => true,
+            'label' => 'Data wysyłki',
+            'name' => 'addParam[ShipmentDate]',
+            'type' => 'date'
+        ],[
+            'isVisible' => true,
+            'label' => 'Data wysyłki2',
+            'name' => 'pickupDate',
+            'type' => 'date'
+        ],[
+            'isVisible' => 'true',
+            'label' => 'Opcje',
+            'name' => "addParam[AccountNo]",
+            'type' => 'selectbox',
+            'selectBoxValues' => [[
+                'label' => 'Label opcji',
+                'name' => 'Name opcji',
+                'value' => 'Value opcji'
+            ],[
+                'label' => 'Label opcji33',
+                'name' => 'Name opcji44',
+                'value' => 'Value opcji55'
+            ]]
+        ]];
+
+        /*$shippingProviderForm = app(ShippingProviderConfigFormContract::class, [
             'translationNamespace' => 'PLUGIN_NAME'
         ]);
 
 // TEXT FIELD
 
-        /** @var InputField $inputField */
         $inputField = app(InputField::class, [
             'name' => 'myInputfieldName',
             'label' => 'startPosition'
@@ -224,7 +248,6 @@ class ShippingController extends Controller
 
 // SELECT FIELD you can also add a select with predefined values:
 
-        /** @var SelectboxField $selectBoxField */
         $selectBoxField = app(selectBoxField::class, [
             'name' => 'mySelectBoxName',
             'label' => 'config.accountList'
@@ -239,7 +262,7 @@ class ShippingController extends Controller
         $out = $shippingProviderForm->getConfigFields(); // this will
 
          $this->logQuery('getConfigFormFields',$out);
-         return $out;
+         return $out;*/
     }
 	public function registerShipments(Request $request, $orderIds)
 	{
