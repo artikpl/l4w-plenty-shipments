@@ -192,6 +192,50 @@ class ShippingController extends Controller
         $this->logQuery('registerShimpment');
         throw new \Exception("Coś nie działa!");
     }
+
+    public function getConfigFormFields(){
+        /** @var ShippingProviderConfigFormContract $shippingProviderForm */
+        $shippingProviderForm = app(ShippingProviderConfigFormContract::class, [
+            'translationNamespace' => 'PLUGIN_NAME'
+        ]);
+
+// TEXT FIELD
+
+        /** @var InputField $inputField */
+        $inputField = app(InputField::class, [
+            'name' => 'myInputfieldName',
+            'label' => 'startPosition'
+        ]);
+
+        $shippingProviderForm->addInputField($inputField);
+
+//DATE FIELD
+        $shippingDate = app(DateField::class, [
+            'name' => 'shipmentDate', // shipmentDate
+            'label' => 'config.shippingDate' //this is a key for that translation
+        ]);
+
+        $shippingProviderForm->addDateField($shippingDate); // add the field
+
+// SELECT FIELD you can also add a select with predefined values:
+
+        /** @var SelectboxField $selectBoxField */
+        $selectBoxField = app(selectBoxField::class, [
+            'name' => 'mySelectBoxName',
+            'label' => 'config.accountList'
+        ]);
+        $selectBoxField->addSelectboxValue('config.labelNameKey', ''); // this is just an example with the first option that can be empty
+        $selectBoxField->addSelectboxValue('config.labelNameKey1', 'value1');
+        $selectBoxField->addSelectboxValue('config.labelNameKey1', 'value2');
+
+        $shippingProviderForm->addSelectboxField($selectBoxField); // add the field
+
+// RETURNING THE OPTIONS ARRAY
+        $out = $shippingProviderForm->getConfigFields(); // this will
+
+         $this->logQuery('getConfigFormFields',$out);
+         return $out;
+    }
 	public function registerShipments(Request $request, $orderIds)
 	{
         $x = $request->get('x');

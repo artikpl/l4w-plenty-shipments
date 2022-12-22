@@ -61,14 +61,9 @@ class Log4WorldShipmentsServiceProvider extends ServiceProvider
             ],
             [
                 'Log4WorldShipments\\Controllers\\ShippingController@registerShipments',
-                'Log4WorldShipments\\Controllers\\ShippingController@registerShimpment',
+                'Log4WorldShipments\\Controllers\\ShippingController@getConfigFormFields',
                 'Log4WorldShipments\\Controllers\\ShippingController@deleteShipments',
-                'Log4WorldShipments\\Controllers\\ShippingController@getLabels',
-                'Log4WorldShipments\\Controllers\\ShippingController@getOption',
-                'Log4WorldShipments\\Controllers\\ShippingController@getOptions',
-                'Log4WorldShipments\\Controllers\\ShippingController@getShipmentOptions',
-                'Log4WorldShipments\\Controllers\\ShippingController@getShipmentOption',
-                'Log4WorldShipments\\Controllers\\ShippingController@getShipmentsOptions',
+                'Log4WorldShipments\\Controllers\\ShippingController@getLabels'
             ]);
     }
 }
