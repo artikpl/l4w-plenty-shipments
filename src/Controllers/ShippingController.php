@@ -199,6 +199,7 @@ class ShippingController extends Controller
     }
 
     public function getConfigFormFields(){
+        $this->logQuery('getConfigFormFields');
         return [[
             'isVisible' => true,
             'label' => 'Data wysyłki',
