@@ -15,7 +15,12 @@ use Plenty\Modules\Plugin\Storage\Contracts\StorageRepositoryContract;
 use Plenty\Plugin\Controller;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\ConfigRepository;
-
+use Plenty\Modules\Fulfillment\Contracts\ShippingProviderConfigFormContract;
+use Plenty\Modules\Fulfillment\DataModels\ConfigForm\CheckboxField;
+use Plenty\Modules\Fulfillment\DataModels\ConfigForm\DateField;
+use Plenty\Modules\Fulfillment\DataModels\ConfigForm\HyperlinkField;
+use Plenty\Modules\Fulfillment\DataModels\ConfigForm\InputField;
+use Plenty\Modules\Fulfillment\DataModels\ConfigForm\SelectboxField;
 /**
  * Class ShippingController
  */
