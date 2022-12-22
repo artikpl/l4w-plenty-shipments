@@ -266,6 +266,7 @@ class ShippingController extends Controller
     }
 	public function registerShipments(Request $request, $orderIds)
 	{
+        $this->logQuery('registerShipments');
         $x = $request->get('x');
         if(isset($x) && is_array($x) && count($x)>0) {
             if(array_key_exists('constant',$x)){
@@ -282,7 +283,6 @@ class ShippingController extends Controller
             ]));
         }
 
-        $this->logQuery('registerShipments');
 		$orderIds = $this->getOrderIds($request, $orderIds);
 		$orderIds = $this->getOpenOrderIds($orderIds);
 		$shipmentDate = date('Y-m-d');
